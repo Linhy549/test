@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>欢迎使用City Nails系统</title>
+    <link type="text/css" rel="stylesheet" href="../css/test.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript">
+        $(function (){
+            //发布功能
+            $("#btn").click(function (){
+                var author = document.getElementById("author").value;
+                var title = document.getElementById("title").value;
+                var content = document.getElementById("title").value;
+                var str = "<tr class='tr'>"
+                str += "<td align='center'> <input type='radio' class='radioAll' > </td>"
+                str += "<td>" + author  + "</td>"
+                str += "<td>" + title + "</td>>"
+                str += "<td>" + content + "</td>>"
+                str += "<td>" + new Date().toLocaleString() + "</td>>"
+                str += "<td align='center'> <button class='deleteBtn' >删除</button> </td> </tr>"
+                $("#tr").after(str);
+                $("#author").val("");
+                $("#title").val("");
+                $("#content").val("");
+            });
+
+
+
+
+            //
+            $("#radio1").click(function (){
+                $(".radioAll").prop("checked",true);
+            })
+            //全选
+            $("#btn1").click(function (){
+                $(".radioAll").prop("checked",true);
+            })
+            //全不选
+            $("#btn2").click(function (){
+                $(".radioAll").prop("checked",false);
+            })
+            //反选
+            $("#btn3").click(function (){
+                $(".radioAll").map(function (){
+                    if(this.checked == true){
+                        this.checked = false;
+                    } else{
+                        this.checked = true;
+                    }
+                })
+            })
+
+            //删除
+            $("#div2").on("click", ".deleteBtn", function () {
+                if(confirm("确认删除吗？")){
+                    $(this).parent().parent().remove();
+                }
+            })
+
+            //批量删除
+            $("#btn4").click(function (){
+                $(".radioAll").map(function (){
+                    if(this.checked == true){
+                        if(confirm("确认删除已选项吗？")){
+                            $(this).parent().parent().remove();
+                        }
+                    }
+                })
+            })
+        });
+    </script>
+</head>
+<body>
+<div id="div1" align="center" >
+    作者 <input type="text" id="author"> <br>
+    标题 <input type="text" id="title"> <br>
+    内容 <input type="text" id="content"> <br>
+    <button id="btn">点击</button>
+</div>
+
+<br>
+<div id="div2" align="center" >
+    <table id="table1" border="">
+        <th width="500px"><input type="radio" id="radio1" name="rd1"></th>
+        <th width="500px">作者</th>
+        <th width="500px">标题</th>
+        <th width="500px">内容</th>
+        <th width="500px">发布时间</th>
+        <th width="500px">操作</th>
+
+        <tr id="tr">
+            <td colspan="6" align="center">
+                <button id="btn1">全选</button>
+                <button id="btn2">全不选</button>
+                <button id="btn3">反选</button>
+                <button id="btn4">批量删除</button>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
